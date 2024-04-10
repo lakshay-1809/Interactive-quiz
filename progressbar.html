@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        #progress-container {
+            width: 300px;
+            background-color: #ccc;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        #progress-bar {
+            width: 0;
+            height: 30px;
+            background-color: #4caf50;
+            transition: width 0.3s ease;
+        }
+
+        #question-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const questions = [
+                "Question 1: What is the capital of France?",
+                "Question 2: Which planet is known as the Red Planet?",
+                "Question 3: What is the largest mammal in the world?"
+            ];
+
+            let currentQuestion = 0;
+
+            function updateProgressBar() {
+                const progressBar = document.getElementById('progress-bar');
+                const progress = ((currentQuestion + 1) / questions.length) * 100;
+                progressBar.style.width = progress + '%';
+            }
+
+            function showNextQuestion() {
+                if (currentQuestion < questions.length - 1) {
+                    currentQuestion++;
+                    updateProgressBar();
+                    displayCurrentQuestion();
+                } else {
+                    alert('Quiz completed!');
+                    // Add code for what to do when the quiz is completed
+                }
+            }
+
+            function displayCurrentQuestion() {
+                const questionContainer = document.getElementById('question-container');
+                questionContainer.textContent = questions[currentQuestion];
+            }
+
+            // Initial setup
+            updateProgressBar();
+            displayCurrentQuestion();
+
+            // Event listener for the "Next" button
+            const nextButton = document.getElementById('next-button');
+            nextButton.addEventListener('click', showNextQuestion);
+        });
+    </script>
+</head>
+<body>
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <div id="question-container"></div>
+
+    <button id="next-button">Next</button>
+</body>
+</html>
